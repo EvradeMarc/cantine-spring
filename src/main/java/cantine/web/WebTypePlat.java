@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import cantine.dao.DaoPlat;
 import cantine.dao.DaoTypePlat;
 import cantine.data.TypePlat;
 import cantine.util.Alert;
@@ -24,6 +25,7 @@ public class WebTypePlat {
 	// -------
 
 	private final DaoTypePlat daoTypePlat;
+	private final DaoPlat daoPlat;
 
 	// -------
 	// Endpoints
@@ -89,9 +91,13 @@ public class WebTypePlat {
 	@PostMapping( "/delete" )
 	public String delete( Long id, Model model ) {
 
-		daoTypePlat.deleteById( id );
-		model.addAttribute( "alert", new Alert( Alert.Color.SUCCESS, "Suppression effectuée avec succès" ) );
-
+		if(daoPlat.compterPourIdTypePlat( id ) == 0) {
+			daoTypePlat.deleteById( id );
+			model.addAttribute( "alert", new Alert( Alert.Color.SUCCESS, "Suppression effectuée avec succès" ) );
+		}else {
+			model.addAttribute( "alert", new Alert( Alert.Color.DANGER, "Suppression impossible ! Au moins un plat est rattaché à ce type" ) );
+		}
+		
 		return getListContent( model );
 
 	}
