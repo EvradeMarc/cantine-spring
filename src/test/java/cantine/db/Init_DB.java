@@ -23,11 +23,13 @@ public class Init_DB {
 	void db_2_Procedures() {
 	}
 
+	
 	@Test
 	@Sql( {
 			"/db/3_delete.sql",
 			"/db/3-compte.sql",
 			"/db/3-plat.sql",
+			"/db/3-ingredient.sql",
 	} )
 	void db_3_Data() {
 	}
