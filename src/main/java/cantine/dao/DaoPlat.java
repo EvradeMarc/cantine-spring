@@ -1,5 +1,7 @@
 package cantine.dao;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -10,4 +12,8 @@ public interface DaoPlat extends CrudRepository<Plat, Long>, PagingAndSortingRep
 	
 	@Query("SELECT COUNT(*) FROM plat WHERE id_type_plat = :idTypePlat")
 	public Long compterPourIdTypePlat(Long idTypePlat);
+	
+	public Page<Plat> findByNomContainingIgnoreCase( String search, Pageable pageable );
+	
+	
 }

@@ -73,6 +73,19 @@
               </div>
             </div>
 
+            <!-- Type de plat -->
+            <div class="row my-4">
+              <div class="col-5 col-xl-4">
+                <label for="idTypePlat" class="col-form-label">Type de plat* </label>
+              </div>
+              <div class="col">
+                <select class="form-select" style="max-width: 9rem;" th:field="*{idTypePlat}">
+                  <option th:each="typePlat : ${typePlats}" value="" th:text="${typePlat.nom}"
+                    th:selected="${typePlat.idTypePlat}==*{idTypePlat}" th:value="${typePlat.idTypePlat}"></option>
+                </select>
+              </div>
+            </div>
+
             <!-- Boutons en bas du formulaire -->
             <div class="mt-4 text-center">
               <input type="submit" class="btn btn-primary" value="Valider">
