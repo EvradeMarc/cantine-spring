@@ -15,5 +15,6 @@ public interface DaoPlat extends CrudRepository<Plat, Long>, PagingAndSortingRep
 	
 	public Page<Plat> findByNomContainingIgnoreCase( String search, Pageable pageable );
 	
-	
+	@Query("SELECT COUNT(*)=0 FROM plat WHERE nom = :nom  AND id_plat <> COALESCE( :id, 0)")
+	public boolean verifierUniciteNom(String nom, Long id);
 }

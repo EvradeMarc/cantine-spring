@@ -45,6 +45,7 @@
               <div class="col">
                 <input type="text" th:field="*{nom}" required autofocus minlength="3" maxlength="50"
                   class="form-control">
+                <div th:errors="*{nom}" class="text-danger"></div>
               </div>
             </div>
 

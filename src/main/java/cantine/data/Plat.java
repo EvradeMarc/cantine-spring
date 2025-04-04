@@ -3,6 +3,7 @@ package cantine.data;
 import java.math.BigDecimal;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,5 +22,8 @@ public class Plat {
 	private int			nbPersonnes;
 	private BigDecimal	cout;
 	private Long		idTypePlat;
+	
+	@Transient
+	private  TypePlat typePlat;
 
 }

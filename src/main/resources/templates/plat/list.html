@@ -49,6 +49,7 @@
                   <tr class="align-middle">
                     <th>Nom</th>
                     <th class="text-center">Actions</th>
+                    <th class="text-center">Type</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -60,6 +61,7 @@
                       <a title="Supprimer" th:data-id="*{idPlat}" th:data-name="*{nom}" onclick="confirm_delete(this)"
                         class="text-secondary bi-trash3" style=" cursor:pointer;"></a>
                     </td>
+                    <td th:text="*{typePlat.nom}" class="text-truncate" style="width: 21%; max-width: 0;"></td>
                   </tr>
                 </tbody>
               </table> <!-- Fin Tableau contenant la liste -->

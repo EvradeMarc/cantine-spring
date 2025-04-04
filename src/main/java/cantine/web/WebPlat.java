@@ -109,14 +109,20 @@ public class WebPlat {
 	// save()
 
 	@PostMapping( "/form" )
-	public String save(
-			Plat item,
-			RedirectAttributes ra ) {
-
-		daoPlat.save( item );
-		ra.addFlashAttribute( "alert", new Alert( Alert.Color.SUCCESS, "Mise à jour effectuée avec succès" ) );
-		return "redirect:/plat/list";
-
+	public String save( @ModelAttribute( "item" ) Plat item,BindingResult result, RedirectAttributes ra, Model model) {
+		
+		
+		if(daoPlat.verifierUniciteNom( item.getNom(), item.getIdPlat() )) {
+			daoPlat.save( item );
+			ra.addFlashAttribute( "alert", new Alert( Alert.Color.SUCCESS, "Mise à jour effectuée avec succès" ) );
+			return "redirect:/plat/list";
+		}else {
+			model.addAttribute( "item", item );
+			model.addAttribute( "typePlats", daoTypePlat.findAll() );
+			result.rejectValue( "nom", "", "Ce nom est déjà utilisé" );
+			//model.addAttribute( "alert", new Alert( Alert.Color.DANGER, "Ce nom est  déjà utilisé" ) );
+			return "plat/form";
+		}
 	}
 
 	// -------
