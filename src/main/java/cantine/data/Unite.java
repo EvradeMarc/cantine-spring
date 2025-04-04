@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(of = "idUnite")
+@EqualsAndHashCode(of = {"idUnite"})
 public class Unite {
 	
 	// -------
@@ -17,7 +17,5 @@ public class Unite {
 	private Long idUnite;
 	private String nom;
 	private String abrev;
-	
-	
 
 }

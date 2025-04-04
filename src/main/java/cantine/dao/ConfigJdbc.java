@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration;
 import org.springframework.data.relational.core.mapping.event.AfterConvertCallback;
 
+import cantine.data.Ingredient;
 import cantine.data.Plat;
 
 @Configuration
@@ -17,6 +18,16 @@ public class ConfigJdbc extends AbstractJdbcConfiguration{
 			 plat.setTypePlat(
 					 daoTypePlat.findById( plat.getIdTypePlat() ).get() );
 			 return plat;
+			 
+		 };
+	 }
+	
+	@Bean
+	AfterConvertCallback<Ingredient> ingredientAfterLoad( @Lazy DaoUnite daoUnite ) {
+		 return ( ingredient ) -> {
+			 ingredient.setUnite(
+					 daoUnite.findById( ingredient.getIdUnite() ).get() );
+			 return ingredient;
 			 
 		 };
 	 }

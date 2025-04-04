@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import cantine.dao.DaoIngredient;
 import cantine.dao.DaoUnite;
 import cantine.data.Unite;
 import cantine.util.Alert;
@@ -25,7 +25,7 @@ public class WebUnite {
 	// -------
 
 	private final DaoUnite daoUnite;
-	//private final DaoIngredient daoIngredient;
+	private final DaoIngredient daoIngredient;
 
 	// -------
 	// Endpoints
@@ -91,12 +91,12 @@ public class WebUnite {
 	@PostMapping( "/delete" )
 	public String delete( Long id, Model model ) {
 
-		//if(daoIngredient.compterPourIdUnite( id ) == 0) {
+		if(daoIngredient.compterPourIdUnite( id ) == 0) {
 			daoUnite.deleteById( id );
 			model.addAttribute( "alert", new Alert( Alert.Color.SUCCESS, "Suppression effectuée avec succès" ) );
-		/*}else {
-			model.addAttribute( "alert", new Alert( Alert.Color.DANGER, "Suppression impossible ! Au moins un plat est rattaché à ce type" ) );
-		}*/
+		}else {
+			model.addAttribute( "alert", new Alert( Alert.Color.DANGER, "Suppression impossible ! Au moins un ingredient est rattaché à ce type" ) );
+		}
 		
 		return getListContent( model );
 
