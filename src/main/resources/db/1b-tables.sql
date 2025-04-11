@@ -49,3 +49,12 @@ CREATE TABLE ingredient(
    UNIQUE(nom),
    FOREIGN KEY(id_unite) REFERENCES unite(id_unite)
 );
+
+CREATE TABLE plat_ingredient(
+   id_plat BIGINT,
+   id_ingredient BIGINT,
+   quantite REAL NOT NULL CHECK (quantite >=0),
+   PRIMARY KEY(id_plat, id_ingredient),
+   FOREIGN KEY(id_plat) REFERENCES plat(id_plat) ON DELETE CASCADE,
+   FOREIGN KEY(id_ingredient) REFERENCES ingredient(id_ingredient)
+);
