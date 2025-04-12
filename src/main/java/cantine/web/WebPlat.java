@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import cantine.dao.DaoIngredient;
 import cantine.dao.DaoPlat;
 import cantine.dao.DaoTypePlat;
 import cantine.data.Plat;
@@ -34,6 +35,7 @@ public class WebPlat {
 
 	private final DaoPlat		daoPlat;
 	private final DaoTypePlat		daoTypePlat;
+	private  final DaoIngredient		daoIngredient;
 
 	// -------
 	// Attributs de session
@@ -98,6 +100,8 @@ public class WebPlat {
 		} else {
 			item = daoPlat.findById( id ).get();
 		}
+		
+		item.updatePlatIngredients( daoIngredient );
 
 		model.addAttribute( "item", item );
 		model.addAttribute( "typePlats", daoTypePlat.findAll() );
@@ -117,6 +121,8 @@ public class WebPlat {
 			ra.addFlashAttribute( "alert", new Alert( Alert.Color.SUCCESS, "Mise à jour effectuée avec succès" ) );
 			return "redirect:/plat/list";
 		}else {
+			item.updatePlatIngredients( daoIngredient );
+			
 			model.addAttribute( "item", item );
 			model.addAttribute( "typePlats", daoTypePlat.findAll() );
 			result.rejectValue( "nom", "", "Ce nom est déjà utilisé" );

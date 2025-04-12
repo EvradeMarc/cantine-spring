@@ -101,7 +101,29 @@
 
       <!-- Colonne 2, photo -->
       <div class=" col-12 col-sm-6 d-flex align-items-center justify-content-center ">
-        <img class="img-fluid" th:src="@{${@photos.path}}">
+        <!-- Ajustement en largeur -->
+        <div class="mx-auto" style="max-width: 17rem;">
+          <!-- Ingrédients du plat -->
+          <table class="table table-sm table-hover table-striped">
+            <thead class="table-success text-center">
+              <tr>
+                <th>Ingrédient</th>
+                <th>Quantité</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="platIngredient : ${item.platIngredients}" th:object="${platIngredient}">
+                <td th:text="*{ingredient.nom}">Riz</td>
+                <td class="text-end">
+                  <span th:text="${#numbers.formatDecimal(platIngredient.quantite,1,3)}">
+                  </span>
+                  <span th:text="${platIngredient.ingredient.unite.abrev}" class="d-inline-block text-start ps-2"
+                    style="width: 2rem;"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table> <!-- Fin Ingrédients du plat -->
+        </div> <!-- Fin Ajustement en largeur -->
       </div> <!-- Fin Colonne 2 -->
 
     </div> <!-- Fin row -->
