@@ -117,6 +117,7 @@ public class WebPlat {
 		
 		
 		if(daoPlat.verifierUniciteNom( item.getNom(), item.getIdPlat() )) {
+			 item.getPlatIngredients().addAll( item.getListPlatIngredients() );
 			daoPlat.save( item );
 			ra.addFlashAttribute( "alert", new Alert( Alert.Color.SUCCESS, "Mise à jour effectuée avec succès" ) );
 			return "redirect:/plat/list";

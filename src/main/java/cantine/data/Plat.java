@@ -1,7 +1,10 @@
 package cantine.data;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
@@ -35,12 +38,19 @@ public class Plat {
 	@Transient
 	private  TypePlat typePlat;
 	
+	@Transient
+	 private List<PlatIngredient> listPlatIngredients = new ArrayList<>();
+	
 	public void updatePlatIngredients( DaoIngredient daoIngredient ) {
 		
 		for(PlatIngredient item : platIngredients) {
 			item.setIngredient(daoIngredient.findById(item.getIdIngredient()).get());
 		}
 		
+		 listPlatIngredients.clear();
+		 listPlatIngredients.addAll( platIngredients );
+		 
+		 Collections.sort( listPlatIngredients );
 		
 	}
 
